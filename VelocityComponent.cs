@@ -96,11 +96,7 @@ public partial class VelocityComponent : Node
     [Export(PropertyHint.Range, "0.1, 5")] private float GravityScale
     {
         get => gravityScale;
-        set
-        {
-            gravityScale = value;
-            UpdateJumpVelocity();
-        }
+        set => SetGravityScale(value);
     }
 
     [Export(PropertyHint.Range, "1, 10")] private int maxJumps = 2;
@@ -455,7 +451,11 @@ public partial class VelocityComponent : Node
     /// Changes the gravity scale value & update jump velocity based on it
     /// </summary>
     /// <param name="scale"></param>
-    public void SetGravityScale(float scale) => GravityScale = scale;
+    public void SetGravityScale(float scale)
+    {
+        GravityScale = scale;
+        UpdateJumpVelocity();
+    }
 
     /// <summary>
     /// Move the controller to the direction of gravity & limits its movement based on (max fall speed)
@@ -475,9 +475,9 @@ public partial class VelocityComponent : Node
         controller.Velocity += down * gravity * dt;
 
         // limits fall speed
-        float downSpeed = controller.Velocity.Dot(-controller.UpDirection);
+        float downSpeed = controller.Velocity.Dot(down);
         if (downSpeed > maxFallSpeed)
-            controller.Velocity -= (-controller.UpDirection) * (downSpeed - maxFallSpeed);
+            controller.Velocity -= down * (downSpeed - maxFallSpeed);
     }
 
     /// <summary>
