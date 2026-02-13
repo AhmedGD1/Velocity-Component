@@ -453,7 +453,7 @@ public partial class VelocityComponent : Node
     /// <param name="scale"></param>
     public void SetGravityScale(float scale)
     {
-        GravityScale = scale;
+        gravityScale = scale;
         UpdateJumpVelocity();
     }
 
