@@ -121,7 +121,9 @@ public partial class VelocityComponent : Node
     public float MaxSpeed => maxSpeed;
     public float MaxJumps => maxJumps;
     public float JumpsLeft => jumpsLeft;
-    public float VelocityLength => controller.Velocity.Length();
+    public float CurrentSpeed => controller.Velocity.Length();
+    public float HorizontalSpeed => Mathf.Abs(controller.Velocity.X);
+    public float VerticalSpeed => Mathf.Abs(controller.Velocity.Y);
 
     public bool IsGrounded { get; private set; }
     public bool IsFalling { get; private set; }
@@ -183,6 +185,8 @@ public partial class VelocityComponent : Node
             jumpsLeft = maxJumps;
         }
     }
+
+    public Vector2 GetVelocity() => controller.Velocity;
 
     /// <summary>
     /// Call it to change the motion mode
