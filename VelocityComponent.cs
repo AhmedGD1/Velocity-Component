@@ -264,16 +264,6 @@ public partial class VelocityComponent : Node
     }
 
     /// <summary>
-    /// A helper method for ground slam effect
-    /// </summary>
-    public void GroundSlam()
-    {
-        if (IsGrounded)
-            return;
-        controller.Velocity = Vector2.Up * maxFallSpeed * 1.5f * controller.UpDirection;
-    }
-
-    /// <summary>
     /// Stops the controller immediately from moving.
     /// </summary>
     /// <param name="freezeY"></param>
